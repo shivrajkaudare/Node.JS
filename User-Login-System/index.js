@@ -72,13 +72,11 @@ app.get("/profile", (req, res) => {
   if (!req.session.userId) {
     return res.redirect("/");
   }
-
   const user = users.find((u) => u.id === req.session.userId);
 
   if (!user) {
     return res.send("User not found.");
   }
-
   res.send(`Welcome, ${user.username}! <br><a href="/logout">Logout</a>`);
 });
 
