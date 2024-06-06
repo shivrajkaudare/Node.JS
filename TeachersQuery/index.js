@@ -1,49 +1,30 @@
-// teacherQuery.js
+const { faker } = require("@faker-js/faker");
 
-const mysql = require("mysql");
+// require MY SQL pakage
+const mysql = require("mysql2");
 
-// Create a connection to the database
-
+// creating connection of node with my sql. i.e. // Create the connection to database
 const connection = mysql.createConnection({
   host: "localhost",
-
-  user: "your_username",
-
-  password: "your_password",
-
-  database: "your_database",
+  user: "root",
+  database: "user_data",
+  password: "Shivraj1234",
 });
 
-// Connect to the database
+try {
+  connection.query("SHOW TABLES", (err, result) => {
+    if (err) throw err;
+    console.log(result);
+  });
+} catch (err) {
+  console.log(err);
+}
 
-connection.connect((err) => {
-  if (err) {
-    console.error("Error connecting to database:", err);
-
-    return;
-  }
-
-  console.log("Connected to database");
-});
-
-// Select all records from the Teacher table where salary is greater than 20,000
-
-const sqlQuery = "SELECT * FROM Teacher WHERE salary > 20000";
-
-// Execute the SQL query
-
-connection.query(sqlQuery, (err, results) => {
-  if (err) {
-    console.error("Error executing query:", err);
-
-    return;
-  }
-
-  console.log("Teachers with salary greater than 20,000:");
-
-  console.log(results);
-});
-
-// Close the connection
-
-connection.end();
+let getRandomUser = () => {
+  return {
+    id: faker.string.uuid(),
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    password: faker.internet.password(),
+  };
+};
