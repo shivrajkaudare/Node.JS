@@ -34,6 +34,7 @@ let getRandomUser = () => {
 };
 
 // ends SQL connection
+// connection.end();
 
 // Home Route :
 // GET Method- route- "/" - Fetch and show total number of users on our app.
